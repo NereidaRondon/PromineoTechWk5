@@ -9,8 +9,8 @@ class Student {
 }
 
 class Period {
-  constructor(periodNum) {
-    this.periodNum = periodNum;
+  constructor(periodName) {
+    this.periodName = periodName;
     this.students = [];
   }
 
@@ -24,7 +24,7 @@ class Period {
     }
   }
   describe() {
-    return `Period ${this.periodNum} has ${this.students.length} students.`;
+    return `Period ${this.periodName} has ${this.students.length} students.`;
   }
 }
 
@@ -78,24 +78,29 @@ class Menu {
     0) Go Back
     1) Add a student
     2) Remove student
-    -----------------------
+    -------------------------------------
     ${periodInfo}
+
     `);
   }
 
   createPeriod() {
-    let periodNum = prompt("Enter number for the new period class:");
-    this.periods.push(new Period(periodNum));
+    let periodName = prompt("Enter name for the new period: (ex: Period 2)");
+    this.periods.push(new Period(periodName));
   }
   viewPeriod() {
-    let index = prompt("Enter number of period you wish to view:");
+    let index = prompt("Enter index of period you wish to view:");
     if (index > -1 && index < this.periods.length) {
       this.selectedPeriod = this.periods[index];
-      let description = "Class Period: " + this.selectedPeriod.periodNum + "\n";
+      let description = "Class: " + this.selectedPeriod.periodName + "\n";
 
       for (let i = 0; i < this.selectedPeriod.students.length; i++) {
         description +=
-          i + ")" + this.selectedPeriod.students[i].position + "\n";
+          i +
+          ") " +
+          this.selectedPeriod.students[i].name +
+          this.selectedPeriod.students[i].grade +
+          "\n";
       }
 
       //Class period menu options
@@ -128,7 +133,7 @@ class Menu {
   showAllPeriods() {
     let periodString = "";
     for (let i = 0; i < this.periods.length; i++) {
-      periodString += i + ")" + this.periods[i].name + "\n";
+      periodString += i + ") " + this.periods[i].periodName + "\n";
     }
     alert(periodString);
   }
