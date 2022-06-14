@@ -9,8 +9,8 @@ class Student {
 }
 
 class Period {
-  constructor(period) {
-    this.periodNum = period;
+  constructor(periodNum) {
+    this.periodNum = periodNum;
     this.studentList = [];
   }
 
@@ -30,62 +30,115 @@ class Period {
 
 class Menu {
   constructor() {
-    this.periods=[];
+    this.periods = [];
     this.selectedPeriod = null;
   }
-  
+
   //Main Menu Options
-  start(){
+  start() {
     let selectOption = this.showMainMenu();
-    while (selectOption != 0){
-        switch(selectOption){
-            case '1': this.createPeriod();
-            break;
-            case '2': this.viewPeriod();
-            break;
-            case '3': this.deletePeriod();
-            break;
-            case '4': this.showAllPeriods();
-            break;
-            default: selectOption =0;
-        }
-        selectOption = this.showMainMenu();
+    while (selectOption != 0) {
+      switch (selectOption) {
+        case "1":
+          this.createPeriod();
+          break;
+        case "2":
+          this.viewPeriod();
+          break;
+        case "3":
+          this.showAllPeriods();
+          break;
+        case "4":
+          this.deletePeriod();
+          break;
+        default:
+          selectOption = 0;
+      }
+      selectOption = this.showMainMenu();
     }
-    alert('Goodbye!');
+    alert("You have exited successfully, goodbye!");
   }
-  
+
   //this is the Main Menu pop up
-  showMainMenu(){
-    return prompt (`
+  showMainMenu() {
+    return prompt(`
+    Main Menu:
     0) Exit
     1) Create period class
     2) View period class
-    3) Delete period class
-    4) Show all periods
+    3) Show all periods
+    4) Delete period class
     `);
   }
-  
-  //Class period menu options
-  let periodOptions = this.showPeriodMenu(description);
-  switch(periodOptions){
-    case '1': this.addStudent();
-    break;
-    case '2': this.removeStudent();
+
+  createPeriod() {
+    let periodName = prompt("Enter number for the new period class:");
+    this.periods.push(new Period(periodNum));
   }
-  
+  viewPeriod() {
+    let index = prompt("Enter number of period you wish to view:");
+    if (index > -1 && index < this.periods.length) {
+      this.selectedPeriod = this.periods[index];
+      let description = "Class Period: " + this.selectedPeriod.periodNum + "\n";
+
+      for (let i = 0; i < this.selectedPeriod.periods.length; i++) {
+        description += i + ")" + this.selectedPeriod.periods[i].position + "\n";
+      }
+
+      //Class period menu options
+      let periodOptions = this.showPeriodMenu(description);
+      switch (periodOptions) {
+        case "1":
+          this.addStudent();
+          break;
+        case "2":
+          this.removeStudent();
+      }
+    }
+  }
+  addStudent() {
+    let name = prompt("Name of new student:");
+    let grade = prompt("Enter math grade:");
+    this.selectedPeriod.periods.push(new Student(name, grade));
+  }
+
+  removeStudent() {
+    let index = prompt(
+      "Enter the index of the student you wish to remove from class period:"
+    );
+
+    if (index > -1 && index < this.selectedPeriod.periods.length) {
+      this.selectedPeriod.periods.splice(index, 1);
+    }
+  }
+
+  showAllPeriods() {
+    let periodString = "";
+    for (let i = 0; i < this.periods.length; i++) {
+      periodString += i + ")" + this.periods[i].name + "\n";
+    }
+    alert(periodString);
+  }
+
+  deletePeriod() {
+    let index = prompt("Enter number of period you wish to delete:");
+    if (index > -1 && index < this.periods.length) {
+      this.periods.splice(index, 1);
+    }
+  }
+
   //this is the period menu pop up
-  showPeriodMenu(){
-    return prompt (`
-    0) Go Back
-    1) Add a student
-    2) Remove student
-    -----------------------
-    
-    `);
+  showPeriodMenu(periodInfo) {
+    return prompt(`
+      Student Menu:
+      0) Go Back
+      1) Add a student
+      2) Remove student
+      -----------------------
+      ${periodInfo}
+      `);
   }
-
-
-
 }
 
-
+let menu = new Menu();
+menu.start();
