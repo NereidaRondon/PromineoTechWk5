@@ -97,9 +97,9 @@ class Menu {
       for (let i = 0; i < this.selectedPeriod.students.length; i++) {
         description +=
           i +
-          ") " +
+          ") NAME: " +
           this.selectedPeriod.students[i].name +
-          "-" +
+          "- GRADE: " +
           this.selectedPeriod.students[i].grade +
           "\n";
       }
