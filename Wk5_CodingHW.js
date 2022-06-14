@@ -11,12 +11,12 @@ class Student {
 class Period {
   constructor(periodNum) {
     this.periodNum = periodNum;
-    this.studentList = [];
+    this.students = [];
   }
 
   addStudent(student) {
     if (student instanceof Student) {
-      this.studentList.push(student);
+      this.students.push(student);
     } else {
       throw new Error(
         `Not a valid instance of student. Argument is not a student: ${student}`
@@ -24,7 +24,7 @@ class Period {
     }
   }
   describe() {
-    return `Period ${this.periodNum} has ${this.studentList.length} students.`;
+    return `Period ${this.periodNum} has ${this.students.length} students.`;
   }
 }
 
@@ -71,8 +71,20 @@ class Menu {
     `);
   }
 
+  //this is the period menu pop up
+  showPeriodMenu(periodInfo) {
+    return prompt(`
+    Student Menu:
+    0) Go Back
+    1) Add a student
+    2) Remove student
+    -----------------------
+    ${periodInfo}
+    `);
+  }
+
   createPeriod() {
-    let periodName = prompt("Enter number for the new period class:");
+    let periodNum = prompt("Enter number for the new period class:");
     this.periods.push(new Period(periodNum));
   }
   viewPeriod() {
@@ -81,8 +93,9 @@ class Menu {
       this.selectedPeriod = this.periods[index];
       let description = "Class Period: " + this.selectedPeriod.periodNum + "\n";
 
-      for (let i = 0; i < this.selectedPeriod.periods.length; i++) {
-        description += i + ")" + this.selectedPeriod.periods[i].position + "\n";
+      for (let i = 0; i < this.selectedPeriod.students.length; i++) {
+        description +=
+          i + ")" + this.selectedPeriod.students[i].position + "\n";
       }
 
       //Class period menu options
@@ -99,7 +112,7 @@ class Menu {
   addStudent() {
     let name = prompt("Name of new student:");
     let grade = prompt("Enter math grade:");
-    this.selectedPeriod.periods.push(new Student(name, grade));
+    this.selectedPeriod.students.push(new Student(name, grade));
   }
 
   removeStudent() {
@@ -107,8 +120,8 @@ class Menu {
       "Enter the index of the student you wish to remove from class period:"
     );
 
-    if (index > -1 && index < this.selectedPeriod.periods.length) {
-      this.selectedPeriod.periods.splice(index, 1);
+    if (index > -1 && index < this.selectedPeriod.students.length) {
+      this.selectedPeriod.students.splice(index, 1);
     }
   }
 
@@ -125,18 +138,6 @@ class Menu {
     if (index > -1 && index < this.periods.length) {
       this.periods.splice(index, 1);
     }
-  }
-
-  //this is the period menu pop up
-  showPeriodMenu(periodInfo) {
-    return prompt(`
-      Student Menu:
-      0) Go Back
-      1) Add a student
-      2) Remove student
-      -----------------------
-      ${periodInfo}
-      `);
   }
 }
 
