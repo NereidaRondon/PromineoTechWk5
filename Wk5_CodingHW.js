@@ -99,6 +99,7 @@ class Menu {
           i +
           ") " +
           this.selectedPeriod.students[i].name +
+          "-" +
           this.selectedPeriod.students[i].grade +
           "\n";
       }
