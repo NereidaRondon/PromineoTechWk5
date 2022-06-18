@@ -3,9 +3,9 @@ class Student {
     this.name = name;
     this.grade = grade;
   }
-  describe() {
-    return `${name} has a(n) ${grade} in Math class`;
-  }
+  //   describe() {
+  //     return `${name} has a(n) ${grade} in Math class`;
+  //   }
 }
 
 class Period {
@@ -99,7 +99,7 @@ class Menu {
           i +
           ") NAME: " +
           this.selectedPeriod.students[i].name +
-          "- GRADE: " +
+          " --- GRADE: " +
           this.selectedPeriod.students[i].grade +
           "\n";
       }
