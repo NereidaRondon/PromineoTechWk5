@@ -3,9 +3,6 @@ class Student {
     this.name = name;
     this.grade = grade;
   }
-  //   describe() {
-  //     return `${name} has a(n) ${grade} in Math class`;
-  //   }
 }
 
 class Period {
@@ -22,9 +19,6 @@ class Period {
         `Not a valid instance of student. Argument is not a student: ${student}`
       );
     }
-  }
-  describe() {
-    return `Period ${this.periodName} has ${this.students.length} students.`;
   }
 }
 
