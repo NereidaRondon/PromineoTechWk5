@@ -66,6 +66,8 @@ class Menu {
   }
 
   //this is the period menu pop up function display
+
+  // IS THIS VIEW PERIOD
   showPeriodMenu(periodInfo) {
     return prompt(`
     Student Menu:
