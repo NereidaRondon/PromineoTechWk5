@@ -28,7 +28,7 @@ class Menu {
     this.selectedPeriod = null;
   }
 
-  //Main Menu Options
+  //Main Menu Options function
   start() {
     let selectOption = this.showMainMenu();
     while (selectOption != 0) {
@@ -53,7 +53,7 @@ class Menu {
     alert("You have exited successfully, goodbye!");
   }
 
-  //this is the Main Menu pop up
+  //this is the Main Menu pop up display
   showMainMenu() {
     return prompt(`
     Main Menu:
@@ -65,7 +65,7 @@ class Menu {
     `);
   }
 
-  //this is the period menu pop up
+  //this is the period menu pop up function display
   showPeriodMenu(periodInfo) {
     return prompt(`
     Student Menu:
@@ -141,5 +141,11 @@ class Menu {
   }
 }
 
+let student1 = new Student("Jane Smith", "B");
+
+let periodHomeRoom = new Period("Homeroom");
+
 let menu = new Menu();
 menu.start();
+
+console.log(student1.grade);
