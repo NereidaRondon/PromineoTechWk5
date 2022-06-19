@@ -141,11 +141,5 @@ class Menu {
   }
 }
 
-let student1 = new Student("Jane Smith", "B");
-
-let periodHomeRoom = new Period("Homeroom");
-
 let menu = new Menu();
 menu.start();
-
-console.log(student1.grade);
