@@ -40,7 +40,7 @@ class Menu {
           this.viewPeriod();
           break;
         case "3":
-          this.showAllPeriods();
+          this.viewAllPeriods();
           break;
         case "4":
           this.deletePeriod();
@@ -58,44 +58,46 @@ class Menu {
     return prompt(`
     Main Menu:
     0) Exit
-    1) Create period class
-    2) View period class
-    3) Show all periods
-    4) Delete period class
+    1) Create Class
+    2) View Class Options
+    3) Show All Class Periods
+    4) Delete Class Period
     `);
   }
 
   //this is the period menu pop up function display
 
-  // IS THIS VIEW PERIOD
+  // this menu shows the options and the selected class information
   showPeriodMenu(periodInfo) {
     return prompt(`
-    Student Menu:
-    0) Go Back
-    1) Add a student
-    2) Remove student
-    -------------------------------------
-    ${periodInfo}
-
+Class Period Menu Options:
+0) Go Back
+1) Add Student
+2) Remove Student
+--------------------------------------------
+${periodInfo}
+     
     `);
   }
 
   createPeriod() {
-    let periodName = prompt("Enter name for the new period: (ex: Period 2)");
+    let periodName = prompt(
+      "Enter name for the new class period: (ex: Period 2)"
+    );
     this.periods.push(new Period(periodName));
   }
   viewPeriod() {
     let index = prompt("Enter index of period you wish to view:");
     if (index > -1 && index < this.periods.length) {
       this.selectedPeriod = this.periods[index];
-      let description = "Class: " + this.selectedPeriod.periodName + "\n";
+      let description = `Class: ${this.selectedPeriod.periodName} \n`;
 
       for (let i = 0; i < this.selectedPeriod.students.length; i++) {
         description +=
           i +
           ") NAME: " +
           this.selectedPeriod.students[i].name +
-          " --- GRADE: " +
+          "  GRADE: " +
           this.selectedPeriod.students[i].grade +
           "\n";
       }
@@ -127,18 +129,28 @@ class Menu {
     }
   }
 
-  showAllPeriods() {
+  viewAllPeriods() {
     let periodString = "";
     for (let i = 0; i < this.periods.length; i++) {
-      periodString += i + ") " + this.periods[i].periodName + "\n";
+      periodString = `${periodString}${i}) ${this.periods[i].periodName}\n `;
     }
-    alert(periodString);
+
+    alert(`
+ Viewing All Class Periods:
+ ${periodString}
+      `);
   }
 
   deletePeriod() {
-    let index = prompt("Enter number of period you wish to delete:");
-    if (index > -1 && index < this.periods.length) {
-      this.periods.splice(index, 1);
+    let pdIndex = prompt("Enter number of class period you wish to delete:");
+    if (pdIndex === null) {
+      alert("Action cancelled...");
+      return false;
+    } else if (pdIndex > -1 && pdIndex < this.periods.length) {
+      this.periods.splice(pdIndex, 1);
+      alert("Class has been deleted!");
+    } else {
+      alert("Not a valid class... delete menu exited.");
     }
   }
 }
